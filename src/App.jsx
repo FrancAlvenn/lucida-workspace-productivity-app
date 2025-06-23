@@ -7,17 +7,14 @@ import { useEffect } from 'react'
 
 import Login from './features/auth/Login.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
-import Home from './features/auth/Home.jsx'
 import ProtectedRoute from './routes/ProtectedRoutes.jsx'
 import SignUp from './features/auth/SignUp.jsx'
+import { LoaderProvider } from './contexts/LoaderContext.jsx'
+import RouteChangeLoader from './routes/RouterChangeLoader.jsx'
 
 
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <ProtectedRoute> <Home /> </ProtectedRoute>,
-  },
   {
     path: "/login",
     element: <Login />,
@@ -39,11 +36,14 @@ function App() {
   }, []);
 
   return (
-    <AuthProvider>
-      <div className='App primary'>
-          <RouterProvider router={router}/>
-      </div>
-    </AuthProvider>
+    <LoaderProvider>
+      <AuthProvider>
+        <div className='App primary'>
+            <RouterProvider router={router}/>
+            <RouteChangeLoader />
+        </div>
+      </AuthProvider>
+    </LoaderProvider>
   )
 }
 

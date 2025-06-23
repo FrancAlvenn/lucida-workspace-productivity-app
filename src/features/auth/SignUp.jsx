@@ -46,7 +46,7 @@ export default function Signup() {
 
     try {
       await signInWithGoogle();
-      navigate("/workspace/dashboard");
+      navigate("/workspace/onboarding");
     } catch (err) {
       console.error("Google sign-in error:", err);
       setError(err.message || "Google sign-in failed");

@@ -9,6 +9,7 @@ import Login from './features/auth/Login.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import Home from './features/auth/Home.jsx'
 import ProtectedRoute from './routes/ProtectedRoutes.jsx'
+import SignUp from './features/auth/SignUp.jsx'
 
 
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 ]);
 
@@ -35,7 +40,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className='App'>
+      <div className='App primary'>
           <RouterProvider router={router}/>
       </div>
     </AuthProvider>

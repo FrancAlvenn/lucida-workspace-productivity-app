@@ -25,10 +25,11 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (currentUser?.workspaceURL) {
-      navigate(`/${currentUser.workspaceURL}`);
-    }
+  if (currentUser) {
+    navigate(`/${currentUser.workspaceURL || "lucida-workspace"}`);
+  }
   }, [currentUser, navigate]);
+
 
   const handleLogin = async (e) => {
     e.preventDefault();

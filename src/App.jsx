@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><Workspace /></ProtectedRoute>,
       },
       {
-        path: "create-workspace",
+        path: "lucida-workspace/create",
         element: <ProtectedRoute><CreateWorkspace /></ProtectedRoute>,
       },
       {

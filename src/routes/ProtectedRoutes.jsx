@@ -10,18 +10,19 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace />;
   }
 
+  //Logged in but has no workspace URL
+  if (!currentUser.workspaceURL && location.pathname !== "/lucida-workspace/create") {
+    return <Navigate to="/lucida-workspace/create" replace />;
+  }
+
   // Logged in and has workspace URL but not currently on the workspace route
   const workspacePath = `/${currentUser.workspaceURL}`;
   if (
     currentUser.workspaceURL &&
-    !location.pathname.startsWith(workspacePath)
+    !location.pathname.startsWith(workspacePath) &&
+    location.pathname !== "/lucida-workspace/create"
   ) {
     return <Navigate to={workspacePath} replace />;
-  }
-
-  //Logged in but has no workspace URL
-  if (!currentUser.workspaceURL && location.pathname !== "/create-workspace") {
-    return <Navigate to="/create-workspace" replace />;
   }
 
   // Either already at the correct route, or no redirect needed

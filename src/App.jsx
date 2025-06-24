@@ -17,6 +17,7 @@ import ProtectedRoute from './routes/ProtectedRoutes.jsx';
 
 import NotFound from './routes/NotFound.jsx';
 import GeneralError from './routes/GeneralError.jsx';
+import MainView from './features/workspaces/components/MainView.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
       {
         path: "lucida-workspace/:workspaceURL",
         element: <ProtectedRoute><Workspace /></ProtectedRoute>,
+        children: [
+          {
+            path: ":mainTab",
+            element: <ProtectedRoute><MainView /></ProtectedRoute>,
+          },
+        ],
       },
       {
         path: "lucida-workspace/create",

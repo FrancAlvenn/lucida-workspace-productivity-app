@@ -3,7 +3,7 @@
 #root {
   height: 100vh;
   width: 100%;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   text-align: center;
   background-color: var(--primary);
   color: var(--text-color);
@@ -16,6 +16,8 @@
   --secondary: #16161C;
 
   --accent: #575BC7;
+
+  --accent-hover: #6D78D5;
 
   --text-color: #ffffff;
 
@@ -62,6 +64,7 @@
 
 /* Accent */
 .accent-bg     { background-color: var(--accent); }
+.accent-bg:hover { background-color: var(--accent-hover); }
 .accent-text { color: var(--accent); }
 
 /* Text and Background Colors */

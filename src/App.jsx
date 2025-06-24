@@ -11,6 +11,8 @@ import ProtectedRoute from './routes/ProtectedRoutes.jsx'
 import SignUp from './features/auth/SignUp.jsx'
 import { LoaderProvider } from './contexts/LoaderContext.jsx'
 import RouteChangeLoader from './routes/RouterChangeLoader.jsx'
+import Workspace from './features/workspaces/Workspace.jsx'
+import CreateWorkspace from './features/workspaces/CreateWorkspace.jsx'
 
 
 
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/:workspaceURL",
+    element: <ProtectedRoute><Workspace /> </ProtectedRoute>,
+  },
+  {
+    path: "/create-workspace",
+    element: <ProtectedRoute><CreateWorkspace /> </ProtectedRoute>,
   },
 ]);
 

@@ -8,6 +8,8 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
+import {doc, getDoc} from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const AuthContext = createContext();
 
@@ -25,13 +27,39 @@ export const AuthProvider = ({ children }) => {
   const signInWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider());
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const userDocRef = doc(db, "users", user.uid);
+          const userDoc = await getDoc(userDocRef);
+
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setCurrentUser({
+              uid: user.uid,
+              email: user.email,
+              ...userData,
+            });
+          } else {
+            // fallback if no doc exists
+            setCurrentUser({ uid: user.uid, email: user.email });
+          }
+        } catch (err) {
+          console.error("Failed to fetch user document:", err);
+          setCurrentUser(user);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+
       setLoading(false);
     });
 
     return unsubscribe;
   }, []);
+
+
+  console.log("Current User:", currentUser);
 
   const value = {
     currentUser,

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogo, Envelope, Lock } from "phosphor-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,9 +8,8 @@ import { useAuth } from "../../contexts/AuthContext";
 
 
 export default function Login() {
-  const { login, signInWithGoogle } = useAuth();
+  const { login, signInWithGoogle, currentUser } = useAuth();
   const navigate = useNavigate();
-  
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [formStatus, setFormStatus] = useState("idle");
@@ -25,6 +24,12 @@ export default function Login() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (currentUser?.workspaceURL) {
+      navigate(`/${currentUser.workspaceURL}`);
+    }
+  }, [currentUser, navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setFormStatus("loading");
@@ -32,7 +37,6 @@ export default function Login() {
 
     try {
       await login(formData.email, formData.password);
-      navigate("/workspace/dashboard");
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message || "Failed to sign in");
@@ -47,7 +51,6 @@ export default function Login() {
     
     try {
       await signInWithGoogle();
-      navigate("/workspace/dashboard");
     } catch (err) {
       console.error("Google sign-in error:", err);
       setError(err.message || "Google sign-in failed");

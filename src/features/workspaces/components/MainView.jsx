@@ -11,8 +11,8 @@ function MainView() {
   const sidebarRef = useRef(null)
   const containerRef = useRef(null)
 
-  const MIN_WIDTH = 348
-  const MAX_WIDTH = 450
+  const MIN_WIDTH = 350
+  const MAX_WIDTH = 550
 
   // Detect screen width and update states
   useEffect(() => {
@@ -33,10 +33,14 @@ function MainView() {
 
   // Update width if it exceeds the new max constraint
   useEffect(() => {
-    if (width > maxConstraint) {
-      setWidth(maxConstraint)
-    }
-  }, [maxConstraint])
+  if (width > maxConstraint) {
+    setWidth(maxConstraint)
+  } else if (width < MIN_WIDTH && maxConstraint >= MIN_WIDTH) {
+    setWidth(MIN_WIDTH)
+  }
+}, [maxConstraint])
+
+  
 
   // Determine positioning based on screen size
   const isMobile = windowWidth < 640
@@ -63,17 +67,17 @@ function MainView() {
         >
           {!isMobile ? (
             <ResizableBox
-              width={Math.min(width, maxConstraint)}
-              height={Infinity}
-              minConstraints={[MIN_WIDTH, Infinity]}
-              maxConstraints={[maxConstraint, Infinity]}
-              axis="x"
-              resizeHandles={['w']}
-              onResizeStop={(e, data) => setWidth(data.size.width)}
-              className={`relative primary border-l border-gray-500 h-[92vh] min-w-[${MIN_WIDTH}px] p-4 primary`}
-              handle={
-                <div className="absolute top-0 left-0 w-[1px] h-[92vh] hover:bg-gray-500 cursor-ew-resize z-20" />
-              }
+                width={Math.min(width, maxConstraint)}
+                height={Infinity}
+                minConstraints={[MIN_WIDTH, Infinity]}
+                maxConstraints={[maxConstraint, Infinity]}
+                axis="x"
+                resizeHandles={['w']}
+                onResize={(e, data) => setWidth(data.size.width)} // <- real-time tracking
+                className="relative primary border-l border-gray-700 h-[92vh] p-4 min-w-[350px] shrink-0"
+                handle={
+                    <div className="absolute top-0 left-0 w-[1px] h-[92vh] hover:bg-gray-500 cursor-ew-resize z-20" />
+                }
             >
               <div className="h-full">
                 {/* Sidebar content */}
@@ -81,7 +85,7 @@ function MainView() {
             </ResizableBox>
           ) : (
             <div 
-              className="shadow-md primary border-l border-gray-500 h-[92vh] p-4"
+              className="shadow-md primary border-l border-gray-700 h-[92vh] p-4"
               style={{ width: `${Math.min(width, maxConstraint)}px` }}
             >
               <div className="h-full">

@@ -35,7 +35,7 @@ function Sidebar({ isMobileOpen, setIsMobileOpen, isLeftSidebarOpen, setIsLeftSi
     <>
       {/* Desktop Sidebar - only shown on lg screens and above */}
       {isDesktop && (
-        <div className="relative h-full hidden lg:block transition-all duration-300">
+        <div className="relative secondary h-full hidden lg:block transition-all duration-300">
           {!isLeftSidebarOpen ? (
             <div style={{ width: `${width}px` }}>
               <ResizableBox
@@ -58,7 +58,7 @@ function Sidebar({ isMobileOpen, setIsMobileOpen, isLeftSidebarOpen, setIsLeftSi
             </div>
           ) : (
             <div
-              className="group relative border-r border-gray-500 transition-all duration-300 ease-in-out overflow-hidden"
+              className="group relative border-r border-gray-700 transition-all duration-300 ease-in-out overflow-hidden"
               style={{ width: `${MINIMIZED_WIDTH}px` }}
             >
               {/* Hover Flyout */}

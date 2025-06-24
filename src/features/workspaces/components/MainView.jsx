@@ -48,11 +48,11 @@ function MainView() {
 
   return (
     <div 
-      className="h-full flex relative transition-all duration-300"
+      className="h-full flex relative transition-all duration-300" 
       ref={containerRef}
     >
       {/* Main Content */}
-      <div className="flex-1 primary h-[92vh]">
+      <div className="flex-1 primary h-[90vh]  lg:h-[85vh] ">
         {/* Main Content */}
       </div>
 
@@ -74,9 +74,9 @@ function MainView() {
                 axis="x"
                 resizeHandles={['w']}
                 onResize={(e, data) => setWidth(data.size.width)} // <- real-time tracking
-                className="relative primary border-l border-gray-700 h-[92vh] p-4 min-w-[350px] shrink-0"
+                className="relative primary border-l border-gray-700 h-[90vh]  lg:h-[85vh]  p-4 min-w-[350px] shrink-0"
                 handle={
-                    <div className="absolute top-0 left-0 w-[1px] h-[92vh] hover:bg-gray-500 cursor-ew-resize z-20" />
+                    <div className="absolute top-0 left-0 w-[1px] h-[90vh]  lg:h-[85vh]  hover:bg-gray-500 cursor-ew-resize z-20" />
                 }
             >
               <div className="h-full">
@@ -85,8 +85,8 @@ function MainView() {
             </ResizableBox>
           ) : (
             <div 
-              className="shadow-md primary border-l border-gray-700 h-[92vh] p-4"
-              style={{ width: `${Math.min(width, maxConstraint)}px` }}
+              className="shadow-md primary border-l border-gray-700 h-[90vh]  lg:h-[85vh]  p-4"
+              style={{ width: `${Math.min(width, maxConstraint)}px`, minWidth: `${MIN_WIDTH}px` }}
             >
               <div className="h-full">
                 {/* Sidebar content */}

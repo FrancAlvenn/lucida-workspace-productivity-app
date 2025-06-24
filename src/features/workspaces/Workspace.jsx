@@ -16,7 +16,7 @@ function Workspace() {
 
 
   return (
-    <div className="flex h-[100vh] secondary overflow-hidden">
+    <div className="flex h-screen secondary overflow-auto">
       <Sidebar
         isMobileOpen={isMobileOpen}
         setIsMobileOpen={setIsMobileOpen}
@@ -28,6 +28,8 @@ function Workspace() {
       {/* Main content */}
       <main className="flex-1 relative lg:my-3 lg:mr-3 lg:border lg:border-gray-700 lg:rounded-lg  primary w-[100vw]">
         <div className="h-11 border-b border-gray-700 px-4 flex items-center justify-between sm:justify-end">
+
+          {/* Sidebar */}
           <div className="flex gap-2 justify-between items-center w-full ">
             <button className="lg:hidden text-color-secondary hover:text-color cursor-pointer transition-colors duration-200" onClick={() => setIsMobileOpen(true)}>
               <PanelRight size={18} />
@@ -47,9 +49,15 @@ function Workspace() {
           </div>
         </div>
 
+        {/* Filters */}
+        <div className="h-11 border-b border-gray-700 px-4 flex items-center justify-between sm:justify-end">
+          <div className="flex gap-2 justify-between items-center w-full ">
+          </div>
+        </div>
 
-        <div className="flex h-[calc(100%-56px)]">
-          <div className="flex-1">
+
+        <div className="flex h-[85vh]">
+          <div className="flex-1 h-full">
             {/* Outlet passes sidebar control as context */}
             <Outlet context={{ isRightSidebarOpen }} />
           </div>

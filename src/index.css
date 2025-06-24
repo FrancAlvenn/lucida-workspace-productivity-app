@@ -19,6 +19,8 @@
 
   --text-color: #ffffff;
 
+  --text-color-secondary: #B0B0B0;
+
   --error: #FF4D4D;
 
   --success: #4CAF50;
@@ -38,6 +40,8 @@
   --accent: #6D78D5;
 
   --text-color: #303446;
+
+  --text-color-secondary: #6D6D6D;
 
   --error: #FF4D4D;
 
@@ -62,6 +66,11 @@
 
 /* Text and Background Colors */
 .text-color { color: var(--text-color); }
+.text-color-secondary { color: var(--text-color-secondary); }
+.text-error { color: var(--error); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-info { color: var(--info); }
 
 /* Error */
 .error-bg       { background-color: var(--error); color: var(--text-color); }

@@ -18,6 +18,7 @@ import ProtectedRoute from './routes/ProtectedRoutes.jsx';
 import NotFound from './routes/NotFound.jsx';
 import GeneralError from './routes/GeneralError.jsx';
 import MainView from './features/workspaces/components/MainView.jsx';
+import { WorkspaceProvider } from './contexts/WorkspaceContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -69,10 +70,12 @@ function App() {
   return (
     <LoaderProvider>
       <AuthProvider>
-        <div className='App primary'>
-          <RouterProvider router={router} />
-          <RouteChangeLoader />
-        </div>
+        <WorkspaceProvider>
+          <div className='App primary'>
+            <RouterProvider router={router} />
+            <RouteChangeLoader />
+          </div>
+        </WorkspaceProvider>
       </AuthProvider>
     </LoaderProvider>
   );

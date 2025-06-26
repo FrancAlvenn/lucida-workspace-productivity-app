@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --bg-mint-500: oklch(0.72 0.11 178);
+}
+
 #root {
   height: 100vh;
   width: 100%;
-  /* padding: 1.5rem; */
   text-align: center;
   background-color: var(--primary);
   color: var(--text-color);
@@ -15,6 +18,8 @@
 
   --secondary: #16161C;
 
+  --overlay: #23242F ;
+
   --accent: #575BC7;
 
   --accent-hover: #6D78D5;
@@ -22,6 +27,8 @@
   --text-color: #ffffff;
 
   --text-color-secondary: #B0B0B0;
+
+  --border-color: #374151;
 
   --error: #FF4D4D;
 
@@ -38,6 +45,8 @@
   --primary: #FCFCFC;
 
   --secondary: #F5F5F5;
+
+  --overlay: #ff000f;
 
   --accent: #6D78D5;
 
@@ -62,18 +71,24 @@
 /* Secondary */
 .secondary     { background-color: var(--secondary); }
 
+/* Overlay */
+.overlay { background-color: var(--overlay); }
+
 /* Accent */
 .accent-bg     { background-color: var(--accent); }
 .accent-bg:hover { background-color: var(--accent-hover); }
 .accent-text { color: var(--accent); }
 
 /* Text and Background Colors */
-.text-color { color: var(--text-color); }
+.text-color { color: var(--text-color)!important; }
 .text-color-secondary { color: var(--text-color-secondary); }
 .text-error { color: var(--error); }
 .text-success { color: var(--success); }
 .text-warning { color: var(--warning); }
 .text-info { color: var(--info); }
+
+/* Borders */
+.border-color { border-color: var(--border-color); }
 
 /* Error */
 .error-bg       { background-color: var(--error); color: var(--text-color); }

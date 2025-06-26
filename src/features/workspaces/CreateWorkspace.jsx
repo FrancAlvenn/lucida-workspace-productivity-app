@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { CaretLeft } from 'phosphor-react';
 import { useAuth } from '../../contexts/AuthContext';
-import { db } from '../../services/firebase';
-import { collection, addDoc, serverTimestamp, updateDoc, doc, query, where, getDocs } from 'firebase/firestore';
+import { useWorkspace } from '../../contexts/WorkspaceContext';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from '../../hooks/useDebounce';
-
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../services/firebase';
 
 function CreateWorkspace() {
   const { currentUser, logout } = useAuth();
+  const { createWorkspace, isLoading } = useWorkspace();
   const navigate = useNavigate();
 
   const [workspaceName, setWorkspaceName] = useState('');
   const [workspaceURL, setWorkspaceURL] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const debouncedURL = useDebounce(workspaceURL, 500);
 
-  // Auto-generate the workspace URL whenever the name changes
   useEffect(() => {
     const slug = workspaceName.trim().toLowerCase().replace(/\s+/g, '-');
     setWorkspaceURL(`${slug}`);
   }, [workspaceName]);
 
-  // Check for duplicate workspace URL
   useEffect(() => {
     const checkURL = async () => {
       if (!debouncedURL) return;
@@ -43,31 +41,17 @@ function CreateWorkspace() {
     checkURL();
   }, [debouncedURL]);
 
+  // ✅ Use context function for workspace creation
   const handleCreateWorkspace = async () => {
     if (!workspaceName || !workspaceURL || !currentUser || error) return;
-
-    const fullURL = `lucida-workspace/${workspaceURL}`;
-    setIsLoading(true);
     try {
-      const newWorkspace = {
+      await createWorkspace({
         name: workspaceName,
-        url: fullURL,
-        createdBy: currentUser.uid,
-        createdAt: serverTimestamp(),
-        members: [currentUser.uid],
-      };
-
-      await addDoc(collection(db, 'workspaces'), newWorkspace);
-
-      await updateDoc(doc(db, 'users', currentUser.uid), {
-        workspaceURL: fullURL,
+        url: workspaceURL,
       });
-
       navigate(`/lucida-workspace`);
     } catch (err) {
-      console.error('Error creating workspace:', err);
-    } finally {
-      setIsLoading(false);
+      console.error('Failed to create workspace:', err);
     }
   };
 
@@ -77,12 +61,11 @@ function CreateWorkspace() {
       <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center px-4 sm:px-10 py-3 w-full h-auto mb-4 gap-4 sm:gap-0'>
         <div className='flex items-center gap-1'>
           <CaretLeft size={16} className='text-white cursor-pointer' />
-          {
-            currentUser.workspaceURL ?
-            (<a href='/lucida-workspace' className='text-color-secondary text-xs font-semibold'>Back to Lucida Workspace</a>)
-            :
-            ( <a onClick={logout} className="text-color-secondary text-xs font-semibold cursor-pointer">Logout</a>)
-          }
+          {currentUser.workspaceURL ? (
+            <a href='/lucida-workspace' className='text-color-secondary text-xs font-semibold'>Back to Lucida Workspace</a>
+          ) : (
+            <a onClick={logout} className="text-color-secondary text-xs font-semibold cursor-pointer">Logout</a>
+          )}
         </div>
         <div className='flex flex-col items-end sm:items-start gap-1 ml-auto'>
           <p className='text-color-secondary text-xs font-semibold'>Logged in as</p>
@@ -93,8 +76,6 @@ function CreateWorkspace() {
       {/* Body */}
       <div className='flex justify-center items-center px-4 sm:px-10 w-full h-full'>
         <div className='flex flex-col items-center gap-5 w-full max-w-md h-full'>
-
-          {/* Header Text */}
           <div className='flex flex-col justify-center items-center gap-4 text-center'>
             <p className='text-color text-2xl font-semibold'>Create a new workspace</p>
             <p className='text-color-secondary text-sm font-semibold'>
@@ -102,9 +83,8 @@ function CreateWorkspace() {
             </p>
           </div>
 
-          {/* Form */}
           <div className='secondary flex flex-col justify-center items-center gap-5 w-full rounded-lg'>
-            <form className='flex flex-col gap-5 w-full p-4 sm:p-10' onSubmit={e => e.preventDefault()}>
+            <form className='flex flex-col gap-5 w-full p-4 sm:p-10' onSubmit={(e) => e.preventDefault()}>
               <div className='flex flex-col items-start gap-2 w-full'>
                 <label htmlFor="workspaceName" className='text-color text-sm font-semibold'>Workspace Name</label>
                 <input
@@ -143,7 +123,6 @@ function CreateWorkspace() {
             </form>
           </div>
 
-          {/* Button */}
           <button
             onClick={handleCreateWorkspace}
             disabled={!workspaceName || isLoading || !!error}

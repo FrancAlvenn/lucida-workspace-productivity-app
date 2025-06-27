@@ -35,7 +35,7 @@ export function WorkspaceProvider({ children }) {
     };
 
 
-    const currentWorkspace = useMemo(() =>
+    const currentWorkspace = useMemo(() => 
         workspaces.find(w => w.url === currentUser?.workspaceURL),
         [workspaces, currentUser?.workspaceURL]
     );

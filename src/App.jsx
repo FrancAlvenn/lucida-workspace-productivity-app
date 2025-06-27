@@ -17,8 +17,14 @@ import ProtectedRoute from './routes/ProtectedRoutes.jsx';
 
 import NotFound from './routes/NotFound.jsx';
 import GeneralError from './routes/GeneralError.jsx';
-import MainView from './features/workspaces/components/MainView.jsx';
+import Projects from './features/projects/Projects.jsx';
 import { WorkspaceProvider } from './contexts/WorkspaceContext.jsx';
+import Container from './components/layout/Container.jsx';
+import { SidebarProvider } from './contexts/SidebarContext.jsx';
+import WorkspaceView from './features/workspaces/components/WorkspaceView.jsx';
+import ProjectView from './features/projects/components/ProjectView.jsx';
+import ProjectViewAll from './features/projects/components/ProjectViewAll.jsx';
+import RouteInit from './routes/RouteInit.jsx';
 
 const router = createBrowserRouter([
   {
@@ -35,17 +41,43 @@ const router = createBrowserRouter([
       },
       {
         path: "lucida-workspace",
-        element: <ProtectedRoute><Workspace /></ProtectedRoute>,
+        element: <ProtectedRoute><Container /></ProtectedRoute>,
       },
       {
-        path: "lucida-workspace/:workspaceURL",
-        element: <ProtectedRoute><Workspace /></ProtectedRoute>,
+        path: "lucida-workspace/",
+        element: <ProtectedRoute><Container /></ProtectedRoute>,
         children: [
           {
-            path: ":mainTab",
-            element: <ProtectedRoute><MainView /></ProtectedRoute>,
+            path: ":workspaceURL",
+            element: <ProtectedRoute><Workspace /></ProtectedRoute>,
+            children: [
+              {
+                path: ":mainTab",
+                element: <ProtectedRoute><WorkspaceView /></ProtectedRoute>
+              }
+            ]
           },
         ],
+      },
+      {
+        path: "lucida-workspace/:workspaceURL/",
+        element: <ProtectedRoute><Container /></ProtectedRoute>,
+        children: [
+          {
+            path: "projects",
+            element: <ProtectedRoute><Projects /></ProtectedRoute>,
+            children: [
+              {
+                path: "all",
+                element: <ProtectedRoute><ProjectViewAll /></ProtectedRoute>
+              },
+              {
+                path: ":projectID",
+                element: <ProtectedRoute><ProjectView /></ProtectedRoute>
+              }
+            ]
+          }
+        ]
       },
       {
         path: "lucida-workspace/create",
@@ -71,10 +103,13 @@ function App() {
     <LoaderProvider>
       <AuthProvider>
         <WorkspaceProvider>
-          <div className='App primary'>
-            <RouterProvider router={router} />
-            <RouteChangeLoader />
-          </div>
+          <SidebarProvider>
+            <div className='App primary'>
+              <RouterProvider router={router} />
+              {/* <RouteInit /> */}
+              <RouteChangeLoader />
+            </div>
+          </SidebarProvider>
         </WorkspaceProvider>
       </AuthProvider>
     </LoaderProvider>

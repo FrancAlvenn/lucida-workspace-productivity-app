@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
-import {doc, getDoc} from "firebase/firestore";
+import {doc, getDoc, updateDoc} from "firebase/firestore";
 import { db } from "../services/firebase";
 
 const AuthContext = createContext();
@@ -25,6 +25,14 @@ export const AuthProvider = ({ children }) => {
   const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
   const logout = () => signOut(auth);
   const signInWithGoogle = () => signInWithPopup(auth, new GoogleAuthProvider());
+
+  // Update user workspaceURL
+  function updateUserWorkspaceURL(workspaceURL) {
+    if (currentUser) {
+      const userDocRef = doc(db, "users", currentUser.uid);
+      updateDoc(userDocRef, { workspaceURL });
+    }
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -67,6 +75,7 @@ export const AuthProvider = ({ children }) => {
     signup,
     logout,
     signInWithGoogle,
+    updateUserWorkspaceURL,
   };
 
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;

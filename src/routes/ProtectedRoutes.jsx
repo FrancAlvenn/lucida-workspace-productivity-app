@@ -20,7 +20,8 @@ export default function ProtectedRoute({ children }) {
   if (
     currentUser.workspaceURL &&
     !location.pathname.startsWith(workspacePath) &&
-    location.pathname !== "/lucida-workspace/create"
+    location.pathname !== "/lucida-workspace/create" &&
+    location.pathname !== "/lucida-workspace/projects/all"
   ) {
     return <Navigate to={workspacePath} replace />;
   }

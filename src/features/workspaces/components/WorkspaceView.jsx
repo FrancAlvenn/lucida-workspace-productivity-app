@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
-import { useOutletContext } from 'react-router-dom'
+// import { useOutletContext } from 'react-router-dom'
 import { ResizableBox } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 
-function MainView() {
-  const { isRightSidebarOpen } = useOutletContext()
+function WorkspaceView({ isRightSidebarOpen }) {
+//   const { isRightSidebarOpen } = useOutletContext()
   const [width, setWidth] = useState(300)
   const [windowWidth, setWindowWidth] = useState(0)
   const [maxConstraint, setMaxConstraint] = useState(450)
@@ -105,4 +105,4 @@ function MainView() {
 
 }
 
-export default MainView
+export default WorkspaceView;

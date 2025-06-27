@@ -6,7 +6,6 @@ import { useLoader } from "../contexts/LoaderContext";
 const RouteChangeLoader = () => {
   const { setLoading } = useLoader();
 
-
   useEffect(() => {
     setLoading(true);
     const timeout = setTimeout(() => {

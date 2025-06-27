@@ -149,7 +149,7 @@ function Sidebar() {
                                             </MenuItem>
                                             ))}
                                             <div className="h-px my-1 bg-gray-700" />
-                                            <MenuItem className="text-color text-sm py-1.5 px-2 flex items-center justify-between hover:bg-gray-700" onClick={async () => {await navigatePage('create')}}>Create or join a workspace</MenuItem>
+                                            <MenuItem className="text-color text-sm py-1.5 px-2 flex items-center justify-between hover:bg-gray-700" onClick={async () => {await navigatePage('/lucida-workspace/create')}}>Create or join a workspace</MenuItem>
                                         </MenuList>
                                     </Menu>
                                     <MenuItem className="text-color text-sm py-1.5 px-2 flex items-center justify-between hover:bg-gray-700">
@@ -195,7 +195,7 @@ function Sidebar() {
                                         </Button>
                                     </div>
                                    <div className="flex items-center gap-1">
-                                        <Button variant="text" ripple={true} className="flex items-center gap-2 w-full p-2 hover:bg-gray-700" onClick={async () => await navigatePage('projects/all')}>
+                                        <Button variant="text" ripple={true} className="flex items-center gap-2 w-full p-2 hover:bg-gray-700" onClick={() => navigatePage(`/${currentWorkspace?.url}/projects/all`)}>
                                             <Box size={16} className="text-color-secondary" />
                                             <p className="text-color text-xs font-semibold">Projects</p>
                                         </Button>

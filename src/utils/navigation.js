@@ -2,11 +2,13 @@
 let navigateFn = null;
 let setLoadingFn = null;
 let authContext = null;
+let workspaceContext = null;
 
-export function initNavigation({ navigate, setLoading, auth }) {
+export function initNavigation({ navigate, setLoading, auth, workspace }) {
   navigateFn = navigate;
   setLoadingFn = setLoading;
   authContext = auth;
+  workspaceContext = workspace;
 }
 
 export async function navigatePage(url) {
@@ -17,8 +19,7 @@ export async function navigatePage(url) {
 
   setLoadingFn(true);
   try {
-    const fullURL = `/lucida-workspace/${url}`;
-    navigateFn(fullURL);
+    navigateFn(url);
   } catch (error) {
     console.error("Failed to navigate:", error);
   } finally {
@@ -29,17 +30,19 @@ export async function navigatePage(url) {
 }
 
 export async function changeWorkspace(workspaceURL) {
-  if (!navigateFn || !setLoadingFn || !authContext) {
+  if (!navigateFn || !setLoadingFn || !authContext || !workspaceContext) {
     console.error("Navigation not properly initialized");
     return;
   }
 
   const { updateUserWorkspaceURL, currentUser } = authContext;
+  const { fetchWorkspaces } = workspaceContext;
 
   setLoadingFn(true);
   try {
     await updateUserWorkspaceURL(workspaceURL);
     currentUser.workspaceURL = workspaceURL;
+    await fetchWorkspaces();
     navigateFn(`/${workspaceURL}`);
   } catch (error) {
     console.error("Failed to switch workspace:", error);

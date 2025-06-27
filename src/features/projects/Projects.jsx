@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import { Box, PanelRight } from 'lucide-react'
 import { useSidebar } from '../../contexts/SidebarContext'
 import MainView from './components/ProjectView'
-import { Outlet, useNavigate } from 'react-router'
+import { Outlet } from 'react-router'
 import { Chip, Typography } from '@material-tailwind/react'
 import { useWorkspace } from '../../contexts/WorkspaceContext'
+import { navigatePage } from '../../utils/navigation'
 
 function Projects() {
 
@@ -12,8 +13,6 @@ function Projects() {
 
     const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false)
     const { setIsLeftSidebarOpen, setIsMobileOpen } = useSidebar();
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         const closeListener = () => setIsRightSidebarOpen(false)
@@ -48,7 +47,7 @@ function Projects() {
                                 </span>
                             }
                             className="bg-gray-700 text-color px-2 py-1 rounded-md cursor-pointer hover:bg-gray-600 transition-colors duration-200"
-                            onClick={() => navigate(`/${currentWorkspace.url}/projects/all`)}
+                            onClick={() => navigatePage(`/${currentWorkspace.url}/projects/all`)}
                         />
                         <div className="h-4 border-l border-gray-500 mx-2"></div>
 

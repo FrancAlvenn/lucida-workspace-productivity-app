@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   // Update user workspaceURL
   function updateUserWorkspaceURL(workspaceURL) {
+    currentUser.workspaceURL = workspaceURL;
     if (currentUser) {
       const userDocRef = doc(db, "users", currentUser.uid);
       updateDoc(userDocRef, { workspaceURL });

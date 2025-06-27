@@ -21,7 +21,7 @@ export default function ProtectedRoute({ children }) {
     currentUser.workspaceURL &&
     !location.pathname.startsWith(workspacePath) &&
     location.pathname !== "/lucida-workspace/create" &&
-    location.pathname !== "/lucida-workspace/projects/all"
+    location.pathname !== "/lucida-workspace/any/projects/all"
   ) {
     return <Navigate to={workspacePath} replace />;
   }

@@ -28,7 +28,14 @@
 
   --text-color-secondary: #B0B0B0;
 
-  --border-color: #374151;
+  --button-color: oklch(37.3% 0.034 259.733);
+  /* bg-gray-700 */
+
+  --hover-color: oklch(37.3% 0.034 259.733);
+  /* bg-gray-700 */
+
+  --border-color: oklch(55.1% 0.027 264.364);
+  /* bg-gray-500 */
 
   --error: #FF4D4D;
 
@@ -66,13 +73,13 @@
 /* ---------- Utility Classes ---------- */
 
 /* Primary */
-.primary     { background-color: var(--primary); }
+.primary     { background-color: var(--primary) !important; }
 
 /* Secondary */
-.secondary     { background-color: var(--secondary); }
+.secondary     { background-color: var(--secondary) !important; }
 
 /* Overlay */
-.overlay { background-color: var(--overlay); }
+.overlay { background-color: var(--overlay) !important; }
 
 /* Accent */
 .accent-bg     { background-color: var(--accent); }
@@ -87,8 +94,13 @@
 .text-warning { color: var(--warning); }
 .text-info { color: var(--info); }
 
+/* Button */
+.button-color { background-color: var(--button-color)!important; }
+.button-color:hover { background-color: var(--hover-color)!important; }
+
 /* Borders */
-.border-color { border-color: var(--border-color); }
+.border-color { border-color: var(--border-color)!important; }
+.border-color:lg { border-color: var(--border-color)!important; }
 
 /* Error */
 .error-bg       { background-color: var(--error); color: var(--text-color); }

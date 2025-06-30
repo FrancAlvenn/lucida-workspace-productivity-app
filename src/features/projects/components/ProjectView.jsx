@@ -75,7 +75,7 @@ function ProjectView() {
                 axis="x"
                 resizeHandles={['w']}
                 onResize={(e, data) => setWidth(data.size.width)}
-                className="relative primary h-full border-l border-gray-500 p-4 min-w-[350px] shrink-0"
+                className="relative primary h-full border-l border-gray-700 p-4 min-w-[350px] shrink-0"
                 handle={
                 <div className="absolute top-0 left-0 w-[1px] h-full hover:bg-gray-500 cursor-ew-resize z-20" />
                 }
@@ -86,7 +86,7 @@ function ProjectView() {
             </ResizableBox>
             ) : (
             <div 
-                className="shadow-md primary border-l border-gray-500 p-4 h-full"
+                className="shadow-md primary border-l border-gray-700 p-4 h-full"
                 style={{
                 width: `${Math.min(width, maxConstraint)}px`,
                 minWidth: `${MIN_WIDTH}px`

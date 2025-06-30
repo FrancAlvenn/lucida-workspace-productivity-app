@@ -17,9 +17,9 @@ function Workspace() {
 
 
   return (
-      <main className="flex-1 h-full relative lg:border lg:border-gray-500 lg:rounded-lg primary ">
+      <main className="flex-1 h-full relative lg:border lg:border-gray-700 lg:rounded-lg primary ">
         <div className='h-full flex flex-col'>
-          <div className="h-10 border-b border-gray-500 px-4 flex items-center justify-between sm:justify-end">
+          <div className="h-10 border-b border-gray-700 px-4 flex items-center justify-between sm:justify-end">
             {/* Sidebar */}
             <div className="flex gap-2 justify-between items-center w-full ">
               <button className="lg:hidden text-color-secondary hover:text-color cursor-pointer transition-colors duration-200" onClick={() => setIsMobileOpen(true)}>
@@ -41,7 +41,7 @@ function Workspace() {
           </div>
 
           {/* Filters */}
-          <div className="h-10 border-b border-gray-500 px-4 flex items-center justify-between sm:justify-end">
+          <div className="h-10 border-b border-gray-700 px-4 flex items-center justify-between sm:justify-end">
             <div className="flex gap-2 justify-between items-center w-full ">
             </div>
           </div>

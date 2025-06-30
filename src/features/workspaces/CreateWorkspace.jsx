@@ -93,14 +93,14 @@ function CreateWorkspace() {
                   placeholder='Enter your workspace name'
                   value={workspaceName}
                   onChange={(e) => setWorkspaceName(e.target.value)}
-                  className='secondary border border-gray-500 w-full h-10 px-3 rounded-md text-color-secondary text-xs font-semibold outline-none focus:ring-2 focus:ring-blue-500'
+                  className='secondary border border-gray-700 w-full h-10 px-3 rounded-md text-color-secondary text-xs font-semibold outline-none focus:ring-2 focus:ring-blue-500'
                 />
               </div>
 
               <div className='flex flex-col items-start gap-2 w-full mt-4'>
                 <label htmlFor="workspaceURL" className='text-color text-sm font-semibold'>Workspace URL</label>
                 <div className='flex items-center w-full'>
-                  <span className='secondary whitespace-nowrap text-color-secondary border border-gray-500 border-r-0 h-10 pl-3 rounded-l-md text-xs font-semibold flex items-center'>
+                  <span className='secondary whitespace-nowrap text-color-secondary border border-gray-700 border-r-0 h-10 pl-3 rounded-l-md text-xs font-semibold flex items-center'>
                     lucida-workspace/
                   </span>
                   <input
@@ -109,7 +109,7 @@ function CreateWorkspace() {
                     placeholder='your-workspace-name'
                     value={workspaceURL}
                     onChange={(e) => setWorkspaceURL(e.target.value.replace(/\s+/g, '-').toLowerCase())}
-                    className='secondary border border-gray-500 border-l-0 w-full h-10 pr-3 rounded-r-md text-color-secondary text-xs font-semibold outline-none'
+                    className='secondary border border-gray-700 border-l-0 w-full h-10 pr-3 rounded-r-md text-color-secondary text-xs font-semibold outline-none'
                   />
                 </div>
                 {error && <p className='error-text text-xs font-medium mt-1'>{error}</p>}

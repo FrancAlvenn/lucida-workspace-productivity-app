@@ -25,6 +25,7 @@ import WorkspaceView from './features/workspaces/components/WorkspaceView.jsx';
 import ProjectView from './features/projects/components/ProjectView.jsx';
 import ProjectViewAll from './features/projects/components/ProjectViewAll.jsx';
 import RouteInit from './routes/RouteInit.jsx';
+import { Toaster } from 'sonner';
 
 const router = createBrowserRouter([
   {
@@ -105,6 +106,14 @@ function App() {
         <WorkspaceProvider>
           <SidebarProvider>
             <div className='App primary'>
+                <Toaster toastOptions={{
+                  classNames: {
+                    toast: 'overlay !border-gray-600',
+                    title: 'text-color',
+                    description: 'text-color',
+                    icon: 'text-color',
+                  },
+                }}/>
               <RouterProvider router={router} />
               {/* <RouteInit /> */}
               <RouteChangeLoader />

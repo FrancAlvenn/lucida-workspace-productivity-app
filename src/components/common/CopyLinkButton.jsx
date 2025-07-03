@@ -38,7 +38,7 @@ function CopyLinkButton() {
     >
         <Button
           onClick={handleCopy}
-          className="p-1 text-color text-xs font-semibold cursor-pointer hover:bg-gray-700"
+          className="p-1 bg-transparent text-color text-xs font-semibold cursor-pointer hover:bg-gray-600"
         >
           <Link size={16} className="text-color-secondary" />
         </Button>

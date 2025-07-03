@@ -8,9 +8,12 @@ import { useWorkspace } from '../../contexts/WorkspaceContext'
 import { navigatePage } from '../../utils/navigation'
 import CopyLinkButton from '../../components/common/CopyLinkButton'
 import ProjectFilterButton from '../../components/common/ProjectFilterButton'
+import CreateProject from './CreateProject'
 
 function Projects() {
     const { currentWorkspace } = useWorkspace();
+
+    const [openModal, setOpenModal] = useState(false);
 
     const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false)
     const { setIsLeftSidebarOpen, setIsMobileOpen } = useSidebar();
@@ -23,7 +26,9 @@ function Projects() {
 
 
     return (
-        <main className="flex-1 h-full relative lg:border lg:border-gray-700 lg:rounded-lg primary ">
+        <>
+        <CreateProject open={openModal} onClose={() => setOpenModal(false)} />
+        <main className="flex-1 h-full lg:border lg:border-gray-700 lg:rounded-lg primary ">
             <div className='h-full flex flex-col'>
                 <div className="h-10 border-b border-gray-700 px-4 flex items-center justify-between sm:justify-end">
                     {/* Sidebar */}
@@ -56,7 +61,7 @@ function Projects() {
 
                             <div className='flex items-center gap-2'>
                                 <CopyLinkButton></CopyLinkButton>
-                                <Button className='flex gap-1 items-center px-2 py-1 text-color text-xs font-semibold hover:bg-gray-700'><Plus size={16} className='text-color-secondary'></Plus> <Typography className='sm:block hidden'>Add Project</Typography></Button>
+                                <Button className='flex bg-gray-700 cursor-pointer gap-1 items-center px-2 py-1 text-color text-xs font-semibold hover:bg-gray-600' onClick={() => setOpenModal(true)}><Plus size={16} className='text-color-secondary'></Plus> <Typography className='sm:block hidden'>Add Project</Typography></Button>
 
                                 <div className="h-4 border-l border-gray-700 mx-2"></div>
                                 <button
@@ -99,6 +104,7 @@ function Projects() {
                 </div>
             </div>
         </main>
+        </>
     )
 }
 

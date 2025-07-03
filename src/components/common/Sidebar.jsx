@@ -19,7 +19,7 @@ function Sidebar() {
 
     const [isDesktop, setIsDesktop] = useState(false)
 
-    const MIN_WIDTH = 200
+    const MIN_WIDTH = 230
     const COLLAPSE_THRESHOLD = 100
     const MINIMIZED_WIDTH = 15
 

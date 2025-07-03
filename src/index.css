@@ -73,10 +73,10 @@
 /* ---------- Utility Classes ---------- */
 
 /* Primary */
-.primary     { background-color: var(--primary) !important; }
+.primary     { background-color: var(--primary); }
 
 /* Secondary */
-.secondary     { background-color: var(--secondary) !important; }
+.secondary     { background-color: var(--secondary); }
 
 /* Overlay */
 .overlay { background-color: var(--overlay) !important; }
@@ -118,4 +118,10 @@
 .info-bg       { background-color: var(--info); color: var(--text-color); }
 .info-text     { color: var(--info); }
 
-
+/* Add to your global CSS */
+.fixed-center {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(200%, -50%) !important;
+}
